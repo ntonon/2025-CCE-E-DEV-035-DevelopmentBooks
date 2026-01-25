@@ -51,7 +51,7 @@ public class BasketServiceImpl implements BasketService {
      */
     @Override
     public double getPrice(BasketDTO basketDTO) {
-        if(isNull(basketDTO) || isNull(basketDTO.getBookIdToQuantityMap())) {
+        if (isNull(basketDTO) || isNull(basketDTO.getBookIdToQuantityMap())) {
             throw new NotNullException("Basket cannot be null");
         }
 
@@ -73,7 +73,7 @@ public class BasketServiceImpl implements BasketService {
 
         double total = 0.0;
         boolean bookToProcess = true; //Is there still books we need to process in the basket?
-        while(bookToProcess) {
+        while (bookToProcess) {
             Pair<Boolean, Double> rotationResult = processBooks(booksToProcess, maxDifferentBooksNum);
 
             bookToProcess = rotationResult.getLeft();
@@ -102,7 +102,7 @@ public class BasketServiceImpl implements BasketService {
 
             //Process book
             if (quantity > 0) {
-                if(differentBooksNumInRotation < maxDifferentBooksNum) {
+                if (differentBooksNumInRotation < maxDifferentBooksNum) {
                     priceSum += price;
 
                     quantity--;
@@ -121,7 +121,7 @@ public class BasketServiceImpl implements BasketService {
     private double computeSalePercentage(int numberOfDifferentBooks) {
         Double salePercentage = BOOK_QUANTITY_TO_SALE_PERCENTAGE.get(numberOfDifferentBooks);
 
-        if(salePercentage == null) {
+        if (salePercentage == null) {
             return 1.0; //Quantity has no reduction
         }
 

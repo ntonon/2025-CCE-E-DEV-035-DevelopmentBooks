@@ -2,10 +2,9 @@ package com.example.developmentbooks.controller;
 
 import com.example.developmentbooks.exception.NotFoundException;
 import com.example.developmentbooks.exception.NotNullException;
-import com.example.developmentbooks.model.dto.BasketDTO;
-import com.example.developmentbooks.service.BasketService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ControllerAdvice {

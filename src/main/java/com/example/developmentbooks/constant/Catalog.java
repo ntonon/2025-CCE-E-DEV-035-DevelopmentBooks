@@ -1,6 +1,5 @@
 package com.example.developmentbooks.constant;
 
-import com.example.developmentbooks.model.dto.BookDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -19,14 +18,4 @@ public enum Catalog {
     final String author;
     final Integer creationYear;
     final Double price;
-
-    public BookDTO getBookDTO() {
-        return BookDTO.builder()
-                .id(id)
-                .title(title)
-                .author(author)
-                .creationYear(creationYear)
-                .price(price)
-                .build();
-    }
 }
