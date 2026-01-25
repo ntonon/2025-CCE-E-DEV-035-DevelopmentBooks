@@ -3,11 +3,11 @@ package com.example.developmentbooks.model.dto;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
 public class BasketDTO {
 
-    private List<BookDTO> bookDTOList;
+    private Map<Long, Integer> bookIdToQuantityMap;
 }

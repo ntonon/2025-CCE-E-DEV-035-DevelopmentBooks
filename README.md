@@ -2,7 +2,7 @@
 
 ### Description
 
-This application provides an RESTful API for user compute the price of their basket. 
+This application provides an RESTful API for user compute the price of their basket.
 
 It follows the description provided in https://stephane-genicot.github.io/DevelopmentBooks.html
 

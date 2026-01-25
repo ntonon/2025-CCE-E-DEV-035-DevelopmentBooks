@@ -2,8 +2,10 @@ package com.example.developmentbooks.constant;
 
 import com.example.developmentbooks.model.dto.BookDTO;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public enum Catalog {
 
     CLEAN_CODE(1L, "Clean Code", "Robert Martin", 2008, 50.0),

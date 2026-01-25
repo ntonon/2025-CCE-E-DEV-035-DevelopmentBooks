@@ -1,7 +1,9 @@
 package com.example.developmentbooks.service;
 
 import com.example.developmentbooks.model.dto.BasketDTO;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BasketServiceImpl implements BasketService {
 
     /*
@@ -16,7 +18,7 @@ public class BasketServiceImpl implements BasketService {
             - Stops at 25% for 5 different articles
      */
     @Override
-    public Double getPrice(BasketDTO basketDTO) {
-        return null;
+    public double getPrice(BasketDTO basketDTO) {
+        return -1.0;
     }
 }
