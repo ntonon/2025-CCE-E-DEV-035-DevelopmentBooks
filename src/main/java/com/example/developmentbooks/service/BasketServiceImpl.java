@@ -5,8 +5,8 @@ import com.example.developmentbooks.exception.NotFoundException;
 import com.example.developmentbooks.exception.NotNullException;
 import com.example.developmentbooks.model.dto.BasketDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.util.Tuple;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -74,10 +74,10 @@ public class BasketServiceImpl implements BasketService {
         double total = 0.0;
         boolean bookToProcess = true; //Is there still books we need to process in the basket?
         while(bookToProcess) {
-            Tuple<Boolean, Double> rotationResult = processBooks(booksToProcess, maxDifferentBooksNum);
+            Pair<Boolean, Double> rotationResult = processBooks(booksToProcess, maxDifferentBooksNum);
 
-            bookToProcess = rotationResult._1();
-            total += rotationResult._2();
+            bookToProcess = rotationResult.getLeft();
+            total += rotationResult.getRight();
         }
 
         return total;
@@ -91,7 +91,7 @@ public class BasketServiceImpl implements BasketService {
 
         On each call, this method process one set of books (considering the maximum) and remove them from the map
      */
-    private Tuple<Boolean, Double> processBooks(HashMap<Long, Integer> booksToProcess, int maxDifferentBooksNum) {
+    private Pair<Boolean, Double> processBooks(HashMap<Long, Integer> booksToProcess, int maxDifferentBooksNum) {
         boolean bookToProcess = false;
 
         double priceSum = 0.0;
@@ -115,7 +115,7 @@ public class BasketServiceImpl implements BasketService {
             }
         }
 
-        return new Tuple<>(bookToProcess, computeSalePercentage(differentBooksNumInRotation) * priceSum);
+        return Pair.of(bookToProcess, computeSalePercentage(differentBooksNumInRotation) * priceSum);
     }
 
     private double computeSalePercentage(int numberOfDifferentBooks) {
