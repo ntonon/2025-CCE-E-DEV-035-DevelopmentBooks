@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import static com.example.developmentbooks.constant.Catalog.*;
+import static com.example.developmentbooks.model.dto.BasketDTO.buildBasketDTO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -165,11 +166,5 @@ public class BasketServiceImplTest {
         Double result = basketService.getPrice(basketDTO);
 
         assertEquals(320.0, result);
-    }
-
-    static BasketDTO buildBasketDTO(Map<Long, Integer> bookIdToQuantityMap) {
-        return BasketDTO.builder()
-                .bookIdToQuantityMap(bookIdToQuantityMap)
-                .build();
     }
 }

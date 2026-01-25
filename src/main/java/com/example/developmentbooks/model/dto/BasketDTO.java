@@ -14,4 +14,10 @@ import java.util.Map;
 public class BasketDTO {
 
     private Map<Long, Integer> bookIdToQuantityMap;
+
+    public static BasketDTO buildBasketDTO(Map<Long, Integer> bookIdToQuantityMap) {
+        return BasketDTO.builder()
+                .bookIdToQuantityMap(bookIdToQuantityMap)
+                .build();
+    }
 }

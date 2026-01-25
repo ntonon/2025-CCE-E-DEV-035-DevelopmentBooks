@@ -20,10 +20,12 @@ public class StoreController {
 
     /*
         Pre: Receive valid basket
-        Post: Return price of articles in basket
+        Post: Return price of books in basket
      */
     @GetMapping("/basket/price")
     public ResponseEntity<Double> getBasketPrice(@RequestBody BasketDTO basketDTO) {
-        return null;
+        Double price = basketService.getPrice(basketDTO);
+
+        return ResponseEntity.ok(price);
     }
 }
