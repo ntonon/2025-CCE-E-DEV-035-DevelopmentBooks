@@ -27,8 +27,11 @@ public class StoreController {
     }
 
     /*
-        Pre: Receive valid basket
-        Post: Return price of books in basket
+        Pre: Basket containing books
+        Post:
+            200 - Return price of books in basket
+            400 - Invalid basket : book(s) not found or null basket
+
      */
     @Operation(summary = "Get price for basket")
     @ApiResponses(value = {
