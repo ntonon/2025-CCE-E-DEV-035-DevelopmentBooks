@@ -10,11 +10,9 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/store")
@@ -33,7 +31,57 @@ public class StoreController {
             400 - Invalid basket : book(s) not found or null basket
 
      */
-    @Operation(summary = "Get price for basket")
+    @Operation(summary = "Get price for basket",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "The basket and its products. A map of book id and quantity.",
+                    content = @Content(
+                            schema = @Schema(implementation = BasketDTO.class),
+                            examples = {
+                                    @ExampleObject(
+                                            name = "Simple basket",
+                                            summary = "Simple basket with only 1 'Clean Code' books.",
+                                            value = """
+                                                    {
+                                                        "bookIdToQuantityMap": {
+                                                            "1": 1
+                                                        }
+                                                    }"""
+                                    ),
+                                    @ExampleObject(
+                                            name = "Complex basket",
+                                            summary = "Complex basket with " +
+                                                    "2 'Clean Code' books, " +
+                                                    "2 'The Clean Coder' books, " +
+                                                    "2 'Clean Architecture' books, " +
+                                                    "1 'Test Driven Development' book " +
+                                                    "and 1 'Working Effectively' book.",
+                                            value = """
+                                                    {
+                                                        "bookIdToQuantityMap": {
+                                                            "1": 2,
+                                                            "2": 2,
+                                                            "3": 2,
+                                                            "4": 1,
+                                                            "5": 1
+                                                        }
+                                                    }"""
+                                    ),
+                                    @ExampleObject(
+                                            name = "Invalid basket",
+                                            summary = "Invalid basket with unknown book.",
+                                            value = """
+                                                    {
+                                                        "bookIdToQuantityMap": {
+                                                            "6": 2
+                                                        }
+                                                    }"""
+                                    )
+                            }
+                    ),
+
+                    required = true
+            )
+    )
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -62,7 +110,7 @@ public class StoreController {
                     )
             )
     })
-    @GetMapping("/basket/price")
+    @PostMapping(value = "/basket/price", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Double> getBasketPrice(@RequestBody BasketDTO basketDTO) {
         Double price = basketService.getPrice(basketDTO);
 
